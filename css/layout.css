@@ -1,0 +1,40 @@
+/* Board-only page: dark backdrop, board centered, author caption below */
+html {
+  background: #111;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: #111;
+}
+
+.author-caption {
+  margin-top: 16px;
+  min-height: 18px;
+  font-family: ui-monospace, 'Cascadia Mono', Consolas, monospace;
+  font-size: 14px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+  display: none;
+}
+
+.author-caption.visible {
+  display: block;
+}
+
+/* Version + fullscreen-status chip (diagnostics, bottom-left) */
+.version-chip {
+  position: fixed;
+  bottom: 8px;
+  left: 10px;
+  font: 11px ui-monospace, Consolas, monospace;
+  color: rgba(255, 255, 255, 0.28);
+  pointer-events: none;
+  z-index: 50;
+}

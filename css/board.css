@@ -1,0 +1,201 @@
+/* Board Container */
+.board {
+  --tile-size: 44px; /* fallback for browsers without clamp() (older TVs) */
+  --tile-size: clamp(36px, 4.2vw, 62px);
+  --tile-gap: clamp(3px, 0.3vw, 5px);
+
+  position: relative;
+  background: #1A1A1A;
+  border-radius: 16px;
+  padding: 28px 48px 40px;
+  width: 100%;
+  box-shadow:
+    0 -4px 20px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+/* Tile Grid */
+.tile-grid {
+  display: grid;
+  grid-template-columns: repeat(var(--grid-cols, 22), var(--tile-size));
+  grid-template-rows: repeat(var(--grid-rows, 5), var(--tile-size));
+  gap: var(--tile-gap);
+  justify-content: center;
+}
+
+/* Accent Squares — small stacked blocks in top corners */
+.accent-bar {
+  position: absolute;
+  top: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  z-index: 5;
+}
+
+.accent-bar-left {
+  left: 18px;
+}
+
+.accent-bar-right {
+  right: 18px;
+  top: 48px; /* below the fullscreen button that owns the corner */
+}
+
+.accent-segment {
+  width: 14px;
+  height: 14px;
+  border-radius: 2px;
+  transition: background-color 0.5s ease;
+}
+
+/* Keyboard Shortcut Indicator */
+.keyboard-hint {
+  position: absolute;
+  bottom: 12px;
+  left: 16px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.35);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.keyboard-hint:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* Random quote button (bottom-right corner) */
+.random-btn {
+  position: absolute;
+  bottom: 12px;
+  right: 16px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: none;
+  padding: 0;
+  background: rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.35);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.random-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* Author toggle sits beside the random button */
+.random-btn.author-btn {
+  right: 52px;
+}
+
+/* Rotation interval picker sits beside the author button */
+.random-btn.rotate-btn {
+  right: 88px;
+}
+
+/* Fullscreen toggle owns the top-right corner */
+.random-btn.fs-btn {
+  top: 12px;
+  right: 16px;
+  bottom: auto;
+}
+
+/* Interval picker menu */
+.rotate-menu {
+  display: none;
+  position: absolute;
+  bottom: 48px;
+  right: 16px;
+  background: rgba(0, 0, 0, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 8px;
+  z-index: 10;
+}
+
+.rotate-menu.visible {
+  display: flex;
+  gap: 6px;
+}
+
+.rotate-menu button {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 6px 10px;
+  cursor: pointer;
+}
+
+.rotate-menu button:hover {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.rotate-menu button.active {
+  background: rgba(255, 255, 255, 0.3);
+  color: #fff;
+}
+
+/* Shortcuts Overlay */
+.shortcuts-overlay {
+  display: none;
+  position: absolute;
+  bottom: 48px;
+  left: 16px;
+  background: rgba(0, 0, 0, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 12px 16px;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.7);
+  z-index: 10;
+  min-width: 180px;
+}
+
+.shortcuts-overlay.visible {
+  display: block;
+}
+
+.shortcuts-overlay div {
+  display: flex;
+  justify-content: space-between;
+  padding: 4px 0;
+}
+
+.shortcuts-overlay kbd {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 1px 6px;
+  border-radius: 3px;
+  font-family: inherit;
+  font-size: 11px;
+  margin-left: 16px;
+}
+
+/* Scroll indicator at bottom of board */
+.board::after {
+  content: '';
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 4px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.15);
+}
